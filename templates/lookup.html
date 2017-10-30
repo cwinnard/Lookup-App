@@ -1,0 +1,28 @@
+<!doctype html>
+<html>
+<head>
+	<title>Zip Code Lookup</title>
+	<link href="{{ url_for('static', filename='styles.css') }}" rel="stylesheet" type="text/css">
+</head>
+<body>
+	<h2 class="heading">Zip Code Lookup Results</h2>
+	<div class="lookupResults">
+		<h4>A USPS lookup confirms the zip code for this address is: <span style="background-color:yellow">{{contact.contactZip}}-{{contact.contactZip2}}</span></h4>
+		<h4>A USPS lookup confirms the city is named: <span style="background-color:yellow">{{contact.contactCity}}</span></h4>
+		<h4>A USPS lookup confirms the state is: <span style="background-color:yellow">{{contact.contactState}}</span></h4>
+		<div class="addContact">
+			<h2>Add This Contact</h2>
+			<form action="add">
+				Name:</br><input type=text" name="name" required></br>
+				Address:</br><input type=text" name="address" value="{{contact.contactAddress}}" required></br>
+				City:</br><input type=text" name="city" value="{{contact.contactCity}}" required></br>
+				State:</br><input type=text" name="state"  value="{{contact.contactState}}" required></br>
+				Zip:</br><input type=text" name="zip"  value="{{contact.contactZip}}-{{contact.contactZip2}}" required></br>
+				<input type="submit" value="Add Contact">
+			</form>
+			</br>
+		</div>
+		<p><a href="/">or go back to your address book</a></p>
+	</div>
+</body>
+</html>

@@ -1,0 +1,100 @@
+<!doctype html>
+<html>
+<head>
+	<title>Address Book</title>
+	<link href="{{ url_for('static', filename='styles.css') }}" rel="stylesheet" type="text/css">
+</head>
+<body>
+	<h1 class="heading">Address Book</h1>
+	<div class="book">
+		<div class="bookLeft">
+			<img class="minus" id="collapseContacts" src="{{ url_for('static', filename='minus.svg') }}" style="display:block"/>
+			<img class="plus" id="expandContacts" src="{{ url_for('static', filename='plus.svg') }}" style="display:none"/>
+			<img class="question" id="infoContacts" src="{{ url_for('static', filename='question.svg') }}" style="display:block"/>
+			<h2>My Contacts</h2>
+			{% for contact in contacts %}
+			<div class="contact" style="display:block">
+				</br>
+				<strong>Name: </strong>{{contact.name}}</br>
+				<strong>Address: </strong>{{contact.address}}</br>
+				<strong>City: </strong>{{contact.city}}</br>
+				<strong>State: </strong>{{contact.state}}</br>
+				<strong>Zip: </strong>{{contact.zip}}</br>
+				</br>
+		    </div>
+		    {% endfor %}
+		</div>
+		
+		<div id="modalContacts" class="modal">
+			<div class="content">
+				<span class="close">&times;</span>
+				<h2>My Contacts Help</h2>
+				<p>This is where your contacts will be stored!</p>
+				<p>Use the "Manage Contacts" section to add or delete contacts.</p>
+			</div>
+		</div>
+
+		<div class="bookRight">
+			<img class="minus" id="collapseManage" src="{{ url_for('static', filename='minus.svg') }}" style="display:block"/>
+			<img class="plus" id="expandManage" src="{{ url_for('static', filename='plus.svg') }}" style="display:none"/>
+			<img class="question" id="infoManage" src="{{ url_for('static', filename='question.svg') }}" style="display:block"/>
+			<h2>Manage Contacts</h2>
+			<div class="lookupWrapper">
+				<div class="lookups">
+					<h2>USPS Lookups</h2>
+					<div class="zipLookup" style="float:left; width: 40%">
+					<h4>Zip Code Lookup</h4>
+						<form action="zip-lookup">
+							Address:</br><input type=text" name="address" required></br>
+							City:</br><input type=text" name="city" required></br>
+							State:</br><input type=text" name="state" required></br>
+							<input type="submit" value="Find Zip Code">
+						</form>
+					</div>
+				
+					<div class="cityStateLookup" style="float:right; width: 40%;">
+					<h4>City and State Lookup</h4>
+						<form action="city-state-lookup">
+							Zip:</br><input type=text" name="zip" required></br>
+							<input type="submit" value="Find City and State">
+						</form>
+					</div>
+				</div>
+				<p><strong>Powered by: </strong><img class="usps" src={{ url_for('static', filename='USPS.png') }}/></p>
+			</div>
+			<div class="addContact">
+				<h2>Add Contact</h2>
+				<form action="add">
+					Name:</br><input type=text" name="name" required></br>
+					Address:</br><input type=text" name="address" required></br>
+					City:</br><input type=text" name="city" required></br>
+					State:</br><input type=text" name="state" required></br>
+					Zip:</br><input type=text" name="zip" required></br>
+					<input type="submit" value="Add Contact">
+				</form>
+				</br>
+			</div>
+			<div class="deleteContact">
+				<h2>Delete Contact</h2>
+				<form action="delete">
+					Name:</br><input type=text" name="name" required></br>
+					<input type="submit" value="Delete Contact">
+				</form>
+				</br>
+			</div>
+		</div>
+		
+		<div id="modalManage" class="modal">
+			<div class="content">
+				<span class="close">&times;</span>
+				<h2>Manage Contacts Help</h2>
+				<p>Use the Lookup section to help find a USPS zip code for any given address OR the city and state for any given zip code. You will have the ability to add that contact on the next page.</p>
+				<p>Use the Add Contact form to add to your contacts! All addresses will be validated with USPS and the official address will be added to your contacts.</p>
+				<p>Bad breakup? Friendship fallout? No problem! Use the Delete Contact form to ceremoniously remove the offending party from your contact list. Effigy burning optional...</p>
+			</div>
+		</div>
+	</div>
+</body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+<script src="{{ url_for('static', filename='lookup.js') }}"></script>
+</html>
